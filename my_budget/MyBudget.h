@@ -3,12 +3,17 @@
 
 #include <iostream>
 
+#include "UserMenager.h"
+#include "FileWithUsers.h"
+
 using namespace std;
 
 class MyBudget {
 
+    UserMenager userMenager;
+
 public:
-    MyBudget();
+    MyBudget(string nameOfFileWithUsers): userMenager(nameOfFileWithUsers) {};
     void userRegistration();
     void listOfAllUsers();
 
