@@ -9,6 +9,9 @@ int main()
     MyBudget myBudget("users.xml");
 
     myBudget.userRegistration();
+    myBudget.userRegistration();
+    myBudget.userRegistration();
+    myBudget.listOfAllUsers();
 
     return 0;
 }
