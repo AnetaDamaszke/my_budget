@@ -1,5 +1,5 @@
 #include "UserMenager.h"
-#include "Markup.h"
+#include "AccessoryMethods.h"
 
 void UserMenager::userRegistration() {
 
@@ -23,12 +23,14 @@ User UserMenager::getDataOfNewUser() {
 
     cout << "Podaj imie: ";
     cin >> name;
+    name = AccessoryMethods::changeFirstLetterToCapitalLetterAndOtherToSmall(name);
     user.setUserName(name);
 
     string surname;
 
     cout << "Podaj nazwisko: ";
     cin >> surname;
+    surname = AccessoryMethods::changeFirstLetterToCapitalLetterAndOtherToSmall(surname);
     user.setUserSurname(surname);
 
     string login;
@@ -82,110 +84,68 @@ void UserMenager::listOfAllUsers() {
     }
 }
 
-//void UserMenager::loadUsersFromFile() {
-//
-//    CMarkup xml;
-//
-//    bool fileExists = xml.Load(getFileName());
-//
-//    User user;
-//    vector<User> users;
-//
-//    xml.ResetPos();
-//    xml.FindElem();
-//    xml.IntoElem();
-//
-//    if (fileExists)
-//    {
-//        while ( xml.FindElem("User") )
-//        {
-//        xml.IntoElem();
-//        xml.FindElem( "UserId");
-//        user.setUserId(atoi( MCD_2PCSZ(xml.GetData())));
-//        xml.FindElem( "Login");
-//        user.setUserLogin(xml.GetData());
-//        xml.FindElem( "Password");
-//        user.setUserPassword(xml.GetData());
-//        xml.FindElem( "Name");
-//        user.setUserName(xml.GetData());
-//        xml.FindElem( "Surname");
-//        user.setUserSurname(xml.GetData());
-//        users.push_back(user);
-//        xml.OutOfElem();
-//        }
-//    }
-//    else
-//        cout << "Blad pliku!" << endl;
-//
-//    cout << users.size() << endl;
-//}
+int UserMenager::userLogin()
+{
+    User user;
+    string login = "", password = "";
 
-//int UserMenager::logowanieUzytkownika()
-//{
-//    Uzytkownik uzytkownik;
-//    string login = "", haslo = "";
-//
-//    cout << "Podaj login: ";
-//    login = MetodyPomocnicze::wczytajLinie();
-//
-//    for(int i=0; i<uzytkownicy.size(); i++)
-//    {
-//        if (uzytkownicy[i].pobierzLogin() == login)
-//        {
-//            for (int iloscProb = 3; iloscProb > 0; iloscProb--)
-//            {
-//                cout << "Podaj haslo. Pozostalo prob: " << iloscProb << ": ";
-//                haslo = MetodyPomocnicze::wczytajLinie();
-//
-//                if (uzytkownicy[i].pobierzHaslo() == haslo)
-//                {
-//                    cout << endl << "Zalogowales sie." << endl << endl;
-//                    system("pause");
-//                    idZalogowanegoUzytkownika = uzytkownicy[i].pobierzId();
-//                    return idZalogowanegoUzytkownika;
-//                }
-//            }
-//            cout << "Wprowadzono 3 razy bledne haslo." << endl;
-//            system("pause");
-//            return 0;
-//        }
-//    }
-//    cout << "Nie ma uzytkownika z takim loginem" << endl << endl;
-//    system("pause");
-//    return 0;
-//}
-//
-//void UserMenager::zmianaHaslaZalogowanegoUzytkownika() {
-//
-//    Uzytkownik uzytkownik;
-//    string noweHaslo = "";
-//    cout << "Podaj nowe haslo: ";
-//    noweHaslo = MetodyPomocnicze::wczytajLinie();
-//
-//    for(int i=0; i<uzytkownicy.size(); i++)
-//    {
-//        if (uzytkownicy[i].pobierzId() == pobierzIdZalogowanegoUzytkownika())
-//        {
-//            uzytkownicy[i].ustawHaslo(noweHaslo);
-//            cout << "Haslo zostalo zmienione." << endl << endl;
-//            system("pause");
-//        }
-//    }
-//
-//    plikZuzytkownikami.zapiszWszystkichUzytkownikowDoPliku(uzytkownicy);
-//}
-//
-//void UserMenager::wylogujUzytkownika() {
-//    idZalogowanegoUzytkownika = 0;
-//    adresaci.clear();
-//}
-//bool UserMenager::czyUzytkownikJestZalogowany() {
-//    if (idZalogowanegoUzytkownika > 0)
-//        return true;
-//    else
-//        return false;
-//}
-//
-//int UserMenager::pobierzIdZalogowanegoUzytkownika() {
-//    return idZalogowanegoUzytkownika;
-//}
+    cout << "Podaj login: ";
+    login = AccessoryMethods::getLine();
+
+    for(int i=0; i<users.size(); i++)
+    {
+        if (users[i].getUserLogin() == login)
+        {
+            for (int test = 3; test > 0; test--)
+            {
+                cout << "Podaj haslo. Pozostalo prob: " << test << ": ";
+                password = AccessoryMethods::getLine();
+
+                if (users[i].getUserPassword() == password)
+                {
+                    cout << endl << "Zalogowales sie." << endl << endl;
+                    system("pause");
+                    idNumberLoggedInUser = users[i].getUserId();
+                    return idNumberLoggedInUser;
+                }
+            }
+            cout << "Wprowadzono 3 razy bledne haslo." << endl;
+            system("pause");
+            return 0;
+        }
+    }
+    cout << "Nie ma uzytkownika z takim loginem" << endl << endl;
+    system("pause");
+    return 0;
+}
+
+void UserMenager::logoutUser() {
+    idNumberLoggedInUser = 0;
+}
+bool UserMenager::isUserLoggedIn() {
+    if (idNumberLoggedInUser > 0)
+        return true;
+    else
+        return false;
+}
+
+int UserMenager::getIdNumberOfLoggedInUser() {
+    return idNumberLoggedInUser;
+}
+
+void UserMenager::changePasswordOfLoggedInUser() {
+
+    string newPassword = "";
+    cout << "Podaj nowe haslo: ";
+    newPassword = AccessoryMethods::getLine();
+
+    for(int i=0; i<users.size(); i++)
+    {
+        if (users[i].getUserId() == getIdNumberOfLoggedInUser())
+        {
+            users[i].setUserPassword(newPassword);
+            fileWithUsers.saveNewPasswordInFile(users[i]);
+            cout << "Haslo zostalo zmienione." << endl << endl;
+        }
+    }
+}

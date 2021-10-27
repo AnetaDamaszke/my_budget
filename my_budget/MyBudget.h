@@ -16,6 +16,10 @@ public:
     MyBudget(string nameOfFileWithUsers): userMenager(nameOfFileWithUsers) {};
     void userRegistration();
     void listOfAllUsers();
+    int userLogin();
+    void logoutUser();
+    bool isUserLoggedIn();
+    void changePasswordOfLoggedInUser();
 
 };
 

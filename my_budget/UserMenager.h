@@ -18,6 +18,7 @@ class UserMenager {
     bool isLoginExists(string userLogin);
     User getDataOfNewUser();
     int getIdOfNewUser();
+    int getIdNumberOfLoggedInUser();
 
 public:
     UserMenager(string nameOfFileWithUsers): fileWithUsers(nameOfFileWithUsers) {
@@ -26,13 +27,10 @@ public:
     };
     void userRegistration();
     void listOfAllUsers();
-    void loadUsersFromFile();
     int userLogin();
     void logoutUser();
     bool isUserLoggedIn();
     void changePasswordOfLoggedInUser();
-
-
 };
 
 #endif

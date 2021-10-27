@@ -11,8 +11,9 @@ int main()
     MyBudget myBudget("users.xml");
     FileWithUsers fileWithUsers("users.xml");
 
-    fileWithUsers.loadUsersFromFile();
-    myBudget.listOfAllUsers();
+    //fileWithUsers.loadUsersFromFile();
+    myBudget.userLogin();
+    myBudget.changePasswordOfLoggedInUser();
 
     return 0;
 }

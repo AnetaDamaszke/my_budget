@@ -65,3 +65,36 @@ vector<User> FileWithUsers::loadUsersFromFile()
 
     return users;
 }
+
+void FileWithUsers::saveNewPasswordInFile(User user)
+{
+    CMarkup xml;
+
+    bool fileExists = xml.Load(getFileName());
+
+    int userId;
+
+    if (fileExists)
+    {
+        xml.ResetPos();
+        xml.FindElem();
+        xml.IntoElem();
+
+        while ( xml.FindElem("User") )
+        {
+            xml.IntoElem();
+            xml.FindElem( "UserId");
+            userId = atoi( MCD_2PCSZ(xml.GetData()));
+            if(userId == user.getUserId())
+            {
+                xml.FindElem("Password");
+                xml.SetData(user.getUserPassword());
+                xml.OutOfElem();
+            }
+        }
+    }
+    else
+        cout << "Blad pliku!" << endl;
+
+    xml.Save(getFileName());
+}
