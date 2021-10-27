@@ -1,0 +1,7 @@
+my_budget.*
+plan/
+bin/
+obj/
+*.txt
+*.mm
+*.pdf
