@@ -1,16 +1,17 @@
 #include <iostream>
 
 #include "MyBudget.h"
+#include "FileWithUsers.h"
+#include "UserMenager.h"
 
 using namespace std;
 
 int main()
 {
     MyBudget myBudget("users.xml");
+    FileWithUsers fileWithUsers("users.xml");
 
-    myBudget.userRegistration();
-    myBudget.userRegistration();
-    myBudget.userRegistration();
+    fileWithUsers.loadUsersFromFile();
     myBudget.listOfAllUsers();
 
     return 0;

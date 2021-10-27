@@ -9,3 +9,4 @@ void MyBudget::listOfAllUsers()
 {
     userMenager.listOfAllUsers();
 }
+

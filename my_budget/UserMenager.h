@@ -20,14 +20,18 @@ class UserMenager {
     int getIdOfNewUser();
 
 public:
-    UserMenager(string nameOfFileWithUsers): fileWithUsers(nameOfFileWithUsers) {};
+    UserMenager(string nameOfFileWithUsers): fileWithUsers(nameOfFileWithUsers) {
+        idNumberLoggedInUser = 0;
+        users = fileWithUsers.loadUsersFromFile();
+    };
     void userRegistration();
     void listOfAllUsers();
+    void loadUsersFromFile();
     int userLogin();
     void logoutUser();
     bool isUserLoggedIn();
     void changePasswordOfLoggedInUser();
-    void loadUsersFromFile();
+
 
 };
 

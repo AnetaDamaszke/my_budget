@@ -1,11 +1,12 @@
 #include "UserMenager.h"
+#include "Markup.h"
 
 void UserMenager::userRegistration() {
 
     User user = getDataOfNewUser();
 
     users.push_back(user);
-    //fileWithUsers.addUserToFile(user);
+    fileWithUsers.addUserToFile(user);
 
     cout << "Konto zalozono pomyslnie" << endl << endl;
     system("pause");
@@ -81,6 +82,44 @@ void UserMenager::listOfAllUsers() {
     }
 }
 
+//void UserMenager::loadUsersFromFile() {
+//
+//    CMarkup xml;
+//
+//    bool fileExists = xml.Load(getFileName());
+//
+//    User user;
+//    vector<User> users;
+//
+//    xml.ResetPos();
+//    xml.FindElem();
+//    xml.IntoElem();
+//
+//    if (fileExists)
+//    {
+//        while ( xml.FindElem("User") )
+//        {
+//        xml.IntoElem();
+//        xml.FindElem( "UserId");
+//        user.setUserId(atoi( MCD_2PCSZ(xml.GetData())));
+//        xml.FindElem( "Login");
+//        user.setUserLogin(xml.GetData());
+//        xml.FindElem( "Password");
+//        user.setUserPassword(xml.GetData());
+//        xml.FindElem( "Name");
+//        user.setUserName(xml.GetData());
+//        xml.FindElem( "Surname");
+//        user.setUserSurname(xml.GetData());
+//        users.push_back(user);
+//        xml.OutOfElem();
+//        }
+//    }
+//    else
+//        cout << "Blad pliku!" << endl;
+//
+//    cout << users.size() << endl;
+//}
+
 //int UserMenager::logowanieUzytkownika()
 //{
 //    Uzytkownik uzytkownik;
@@ -140,28 +179,6 @@ void UserMenager::listOfAllUsers() {
 //    idZalogowanegoUzytkownika = 0;
 //    adresaci.clear();
 //}
-//
-//void UserMenager::wczytajUzytkownikowZPliku() {
-//
-//    Uzytkownik uzytkownik;
-//    string daneJednegoUzytkownikaOddzielonePionowymiKreskami = "";
-//    string nazwaPlikuZuzytkownikami;
-//
-//    fstream plikTekstowy;
-//    plikTekstowy.open(nazwaPlikuZuzytkownikami.c_str(), ios::in);
-//
-//    if (plikTekstowy.good() == true)
-//    {
-//        while (getline(plikTekstowy, daneJednegoUzytkownikaOddzielonePionowymiKreskami))
-//        {
-//            uzytkownik = plikZuzytkownikami.pobierzDaneUzytkownika(daneJednegoUzytkownikaOddzielonePionowymiKreskami);
-//            uzytkownicy.push_back(uzytkownik);
-//        }
-//
-//    }
-//    plikTekstowy.close();
-//}
-//
 //bool UserMenager::czyUzytkownikJestZalogowany() {
 //    if (idZalogowanegoUzytkownika > 0)
 //        return true;
