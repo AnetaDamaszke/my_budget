@@ -15,7 +15,7 @@ int MyBudget::userLogin()
     userMenager.userLogin();
     if(userMenager.isUserLoggedIn())
     {
-        incomeMenager = new IncomeMenager(userMenager.getIdNumberOfLoggedInUser());
+        incomeMenager = new IncomeMenager(NAME_OF_FILE_WITH_INCOMES, userMenager.getIdNumberOfLoggedInUser());
     }
 }
 
@@ -43,4 +43,9 @@ void MyBudget::addNewIncome()
     else
         cout << "Aby dodac przychod nalezy sie zalogowac" << endl;
 
+}
+
+void MyBudget::displayIncomes()
+{
+    incomeMenager->displayIncomes();
 }

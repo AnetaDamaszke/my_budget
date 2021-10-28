@@ -11,13 +11,17 @@ using namespace std;
 
 class FileWithIncomes : public XmlFile {
 
-    int idNumerLastIncome;
+    int idNumberLastIncome;
     vector<Income> incomes;
 
 public:
-    FileWithIncomes();
-    void addIncomeToFile();
+    FileWithIncomes(string fileName): XmlFile(fileName)
+    {
+        idNumberLastIncome = 0;
+    };
+    void addIncomeToFile(Income income);
     vector<Income> loadIncomesFromFile();
+    string conversionDateToString(int date);
 };
 
 #endif

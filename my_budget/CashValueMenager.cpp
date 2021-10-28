@@ -259,27 +259,3 @@ int CashValueMenager::conversionDateToInteger(string date)
 
     return dateInInteger;
 }
-
-string CashValueMenager::conversionDateToString(int date)
-{
-    string dateInString;
-    string year, month, day;
-
-    dateInString = AccessoryMethods::conversionIntToString(date);
-
-    year = dateInString.substr(0,4);
-
-    month = dateInString.substr(4,2);
-
-    if(month.size() == 1)
-        month = "0" + month;
-
-    day = dateInString.substr(6,2);
-
-    if(day.size() == 1)
-        day = "0" + day;
-
-    dateInString = year + "-" +month + "-" + day;
-
-    return dateInString;
-}

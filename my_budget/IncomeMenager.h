@@ -12,17 +12,18 @@ using namespace std;
 
 class IncomeMenager : public CashValueMenager {
 
-    int idNumberOfLoggedInUser;
+    const int ID_NUMBER_OF_LOGGED_IN_USER;
     vector<Income> incomes;
-    //FileWithIncomes fileWithIncomes;
+    FileWithIncomes fileWithIncomes;
 
     Income getDataOfNewIncome();
     int getIdOfNewIncome();
     int getIdNumberOfLoggedInUser();
 
 public:
-    IncomeMenager(int idNumberOfLoggedInUser): CashValueMenager(idNumberOfLoggedInUser) {};
+    IncomeMenager(string nameOfFileWithIncomes, int idNumberOfLoggedInUser): fileWithIncomes(nameOfFileWithIncomes), ID_NUMBER_OF_LOGGED_IN_USER(idNumberOfLoggedInUser) {};
     void addNewIncome();
+    void displayIncomes();
 };
 
 #endif

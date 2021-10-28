@@ -14,8 +14,6 @@ using namespace std;
 
 class CashValueMenager {
 
-    const int ID_NUMBER_OF_LOGGED_IN_USER;
-
     int getYear(string date);
     int getMonth(string date);
     int getDay(string date);
@@ -26,14 +24,11 @@ class CashValueMenager {
     int howManyDaysIsTheCurrentMonth();
 
 public:
-    CashValueMenager(int idNumberOfLoggedInUser): ID_NUMBER_OF_LOGGED_IN_USER(idNumberOfLoggedInUser) {};
-
     bool isDateCorrect(string date);
     string changeAmountToCorrect(string amount);
     void compareTheDates();
     float conversionStringToFloat(string num);
     int conversionDateToInteger(string date);
-    string conversionDateToString(int date);
 };
 
 #endif

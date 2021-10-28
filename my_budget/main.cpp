@@ -9,10 +9,13 @@ using namespace std;
 
 int main()
 {
-    MyBudget myBudget("users.xml");
+    MyBudget myBudget("users.xml", "incomes.xml");
 
     myBudget.userLogin();
     myBudget.addNewIncome();
+    myBudget.addNewIncome();
+    myBudget.addNewIncome();
+    myBudget.displayIncomes();
 
     return 0;
 }

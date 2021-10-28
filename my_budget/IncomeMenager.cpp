@@ -7,7 +7,7 @@ void IncomeMenager::addNewIncome()
     Income income = getDataOfNewIncome();
 
     incomes.push_back(income);
-    //fileWithIncomes.addIncomeToFile(income);
+    fileWithIncomes.addIncomeToFile(income);
 
     cout << "Przychod dodany pomyslnie." << endl;
     system("pause");
@@ -38,12 +38,25 @@ Income IncomeMenager::getDataOfNewIncome()
     income.setItem(item);
 
     cout << "Podaj wartosc przychodu: ";
-    amount = AccessoryMethods::getNumber();
+    amount = AccessoryMethods::getLine();
     amount = changeAmountToCorrect(amount);
     amountFl = conversionStringToFloat(amount);
     income.setAmount(amountFl);
 
     return income;
+}
+
+void IncomeMenager::displayIncomes()
+{
+    for(int i=0; i<incomes.size(); i++)
+    {
+        cout << incomes[i].getIncomeId() << endl;
+        cout << incomes[i].getUserId() << endl;
+        cout << fileWithIncomes.conversionDateToString(incomes[i].getDate()) << endl;
+        cout << incomes[i].getItem() << endl;
+        cout << incomes[i].getAmount() << endl;
+        cout << endl;
+    }
 }
 
 int IncomeMenager::getIdOfNewIncome()
@@ -56,5 +69,5 @@ int IncomeMenager::getIdOfNewIncome()
 
 int IncomeMenager::getIdNumberOfLoggedInUser()
 {
-    return idNumberOfLoggedInUser;
+    return ID_NUMBER_OF_LOGGED_IN_USER;
 }
