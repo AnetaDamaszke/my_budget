@@ -15,7 +15,7 @@ void CashValue::setItem(string newItem)
     item = newItem;
 }
 
-void CashValue::setAmount(string newAmount)
+void CashValue::setAmount(float newAmount)
 {
     amount = newAmount;
 }

@@ -24,10 +24,10 @@ string AccessoryMethods::getLine()
     return input;
 }
 
-int AccessoryMethods::getIntegerNumber()
+float AccessoryMethods::getNumber()
 {
     string input = "";
-    int num = 0;
+    float num = 0;
 
     while (true)
     {

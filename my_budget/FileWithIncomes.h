@@ -4,6 +4,9 @@
 #include <iostream>
 #include <vector>
 
+#include "Income.h"
+#include "XmlFile.h"
+
 using namespace std;
 
 class FileWithIncomes : public XmlFile {

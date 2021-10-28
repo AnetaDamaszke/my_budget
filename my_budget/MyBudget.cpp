@@ -13,6 +13,10 @@ void MyBudget::listOfAllUsers()
 int MyBudget::userLogin()
 {
     userMenager.userLogin();
+    if(userMenager.isUserLoggedIn())
+    {
+        incomeMenager = new IncomeMenager(userMenager.getIdNumberOfLoggedInUser());
+    }
 }
 
 void MyBudget::logoutUser()
@@ -28,4 +32,15 @@ bool MyBudget::isUserLoggedIn()
 void MyBudget::changePasswordOfLoggedInUser()
 {
     userMenager.changePasswordOfLoggedInUser();
+}
+
+void MyBudget::addNewIncome()
+{
+    if(userMenager.isUserLoggedIn())
+    {
+        incomeMenager->addNewIncome();
+    }
+    else
+        cout << "Aby dodac przychod nalezy sie zalogowac" << endl;
+
 }

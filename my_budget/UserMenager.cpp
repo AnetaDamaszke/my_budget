@@ -22,14 +22,14 @@ User UserMenager::getDataOfNewUser() {
     string name;
 
     cout << "Podaj imie: ";
-    cin >> name;
+    name = AccessoryMethods::getLine();
     name = AccessoryMethods::changeFirstLetterToCapitalLetterAndOtherToSmall(name);
     user.setUserName(name);
 
     string surname;
 
     cout << "Podaj nazwisko: ";
-    cin >> surname;
+    surname = AccessoryMethods::getLine();
     surname = AccessoryMethods::changeFirstLetterToCapitalLetterAndOtherToSmall(surname);
     user.setUserSurname(surname);
 
@@ -38,14 +38,14 @@ User UserMenager::getDataOfNewUser() {
     do
     {
         cout << "Podaj login: ";
-        cin >> login;
+        login = AccessoryMethods::getLine();
         user.setUserLogin(login);
     } while (isLoginExists(user.getUserLogin()) == true);
 
     string password;
 
     cout << "Podaj haslo: ";
-    cin >> password;
+    password = AccessoryMethods::getLine();
     user.setUserPassword(password);
 
     return user;

@@ -14,7 +14,7 @@ public:
     static string changeFirstLetterToCapitalLetterAndOtherToSmall(string text);
     static int conversionStringToInt(string num);
     static string getLine();
-    static int getIntegerNumber();
+    static float getNumber();
     static char getSign();
 };
 
