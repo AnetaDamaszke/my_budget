@@ -28,6 +28,7 @@ public:
     void addNewIncome();
     void displayIncomes();
     float sumIncomes();
+    void sortIncomesByDate();
 };
 
 #endif

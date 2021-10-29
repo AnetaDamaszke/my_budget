@@ -12,8 +12,7 @@ int main()
     //MyBudget myBudget("users.xml", "incomes.xml");
     IncomeMenager incomeMenager("incomes.xml", 1);
 
-    incomeMenager.displayIncomes();
-    cout << "Suma przychodow wynosi: " << incomeMenager.sumIncomes() << " zl";
+    incomeMenager.sortIncomesByDate();
 
     return 0;
 }

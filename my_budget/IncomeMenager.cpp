@@ -83,3 +83,13 @@ float IncomeMenager::sumIncomes()
 
     return sumIncomes;
 }
+
+void IncomeMenager::sortIncomesByDate()
+{
+    sort(incomes.begin(), incomes.end());
+
+    for(int i=0; i < incomes.size(); i++)
+    {
+        cout << fileWithIncomes.conversionDateToString(incomes[i].getDate()) << ": " << incomes[i].getAmount() <<  " zl" << endl;
+    }
+}

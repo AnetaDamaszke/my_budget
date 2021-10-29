@@ -19,6 +19,13 @@ public:
         this-> date = date;
         this-> item = item;
         this-> amount = amount;
+    };
+
+    CashValue(int d, float a): date(d), amount(a) {}
+
+    bool operator < (const CashValue str) const
+    {
+        return (date < str.date);
     }
     void setUserId(int newUserId);
     void setDate(int newDate);
