@@ -8,8 +8,6 @@ void FileWithIncomes::addIncomeToFile(Income income)
 {
     CMarkup xml;
 
-    string date = conversionDateToString(income.getDate());
-
     bool fileExists = xml.Load(getFileName());
 
     if (!fileExists)
@@ -24,35 +22,11 @@ void FileWithIncomes::addIncomeToFile(Income income)
     xml.IntoElem();
     xml.AddElem("IncomeId", income.getIncomeId());
     xml.AddElem("UserId", income.getUserId());
-    xml.AddElem("Date", income.getDate());
+    xml.AddElem("Date", cashValueMenager.conversionDateToString(income.getDate()));
     xml.AddElem("Item", income.getItem());
     xml.AddElem("Amount", income.getAmount());
 
     xml.Save(getFileName());
-}
-
-string FileWithIncomes::conversionDateToString(int date)
-{
-    string dateInString;
-    string year, month, day;
-
-    dateInString = AccessoryMethods::conversionIntToString(date);
-
-    year = dateInString.substr(0,4);
-
-    month = dateInString.substr(4,2);
-
-    if(month.size() == 1)
-        month = "0" + month;
-
-    day = dateInString.substr(6,2);
-
-    if(day.size() == 1)
-        day = "0" + day;
-
-    dateInString = year + "-" +month + "-" + day;
-
-    return dateInString;
 }
 
 vector<Income> FileWithIncomes::loadIncomesFromFile(int ID_NUMBER_OF_LOGGED_IN_USER)

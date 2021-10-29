@@ -52,7 +52,7 @@ void IncomeMenager::displayIncomes()
     {
         cout << incomes[i].getIncomeId() << endl;
         cout << incomes[i].getUserId() << endl;
-        cout << fileWithIncomes.conversionDateToString(incomes[i].getDate()) << endl;
+        cout << conversionDateToString(incomes[i].getDate()) << endl;
         cout << incomes[i].getItem() << endl;
         cout << incomes[i].getAmount() << endl;
         cout << endl;
@@ -90,6 +90,6 @@ void IncomeMenager::sortIncomesByDate()
 
     for(int i=0; i < incomes.size(); i++)
     {
-        cout << fileWithIncomes.conversionDateToString(incomes[i].getDate()) << ": " << incomes[i].getAmount() <<  " zl" << endl;
+        cout << conversionDateToString(incomes[i].getDate()) << ": " << incomes[i].getAmount() <<  " zl" << endl;
     }
 }

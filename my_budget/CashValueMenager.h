@@ -29,6 +29,7 @@ public:
     void compareTheDates();
     float conversionStringToFloat(string num);
     int conversionDateToInteger(string date);
+    string conversionDateToString(int date);
 };
 
 #endif
