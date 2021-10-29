@@ -1,4 +1,5 @@
 #include "MyBudget.h"
+#include "AccessoryMethods.h"
 
 void MyBudget::userRegistration()
 {
@@ -55,12 +56,43 @@ void MyBudget::addNewExpense()
         cout << "Aby dodac przychod nalezy sie zalogowac" << endl;
 }
 
-void MyBudget::displayIncomes()
+char MyBudget::selectOptionFromMainMenu()
 {
-    incomeMenager->displayIncomes();
+    char choice;
+
+    system("cls");
+    cout << "    >>> MENU  GLOWNE <<<" << endl;
+    cout << "---------------------------" << endl;
+    cout << "1. Rejestracja" << endl;
+    cout << "2. Logowanie" << endl;
+    cout << "9. Koniec programu" << endl;
+    cout << "---------------------------" << endl;
+    cout << "Twoj wybor: ";
+    choice = AccessoryMethods::getSign();
+    cout << endl;
+
+    return choice;
 }
 
-void MyBudget::displayExpenses()
+char MyBudget::selectOptionFromUserMenu()
 {
-    expenseMenager->displayExpenses();
+    char choice;
+
+    system("cls");
+    cout << " >>> MENU UZYTKOWNIKA <<<" << endl;
+    cout << "---------------------------" << endl;
+    cout << "1. Dodaj nowy przychod" << endl;
+    cout << "2. Dodaj nowy wydatek" << endl;
+    cout << "3. Pokaz bilans z biezacego miesiaca" << endl;
+    cout << "4. Pokaz bilans z poprzedniego miesiaca" << endl;
+    cout << "5. Pokaz bilans z wybranego okresu" << endl;
+    cout << "---------------------------" << endl;
+    cout << "6. Zmien haslo" << endl;
+    cout << "7. Wyloguj sie" << endl;
+    cout << "---------------------------" << endl;
+    cout << "Twoj wybor: ";
+    choice = AccessoryMethods::getSign();
+    cout << endl;
+
+    return choice;
 }

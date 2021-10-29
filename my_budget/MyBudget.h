@@ -40,9 +40,11 @@ public:
     void changePasswordOfLoggedInUser();
     void addNewIncome();
     void addNewExpense();
-    void displayIncomes();
-    void displayExpenses();
-
+    char selectOptionFromMainMenu();
+    char selectOptionFromUserMenu();
+    void displayBalanceSheetForCurrentMonth();
+    void displayBalanceSheetForLastMonth();
+    void displayBalanceSheetForSelectionDate();
 };
 
 #endif

@@ -146,6 +146,7 @@ void UserMenager::changePasswordOfLoggedInUser() {
             users[i].setUserPassword(newPassword);
             fileWithUsers.saveNewPasswordInFile(users[i]);
             cout << "Haslo zostalo zmienione." << endl << endl;
+            system("pause");
         }
     }
 }
