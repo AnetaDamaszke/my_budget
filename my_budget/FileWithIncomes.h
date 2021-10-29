@@ -23,7 +23,6 @@ public:
     };
     void addIncomeToFile(Income income);
     vector<Income> loadIncomesFromFile(int ID_NUMBER_OF_LOGGED_IN_USER);
-    string conversionDateToString(int date);
 };
 
 #endif

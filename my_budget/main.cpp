@@ -10,9 +10,9 @@ using namespace std;
 int main()
 {
     //MyBudget myBudget("users.xml", "incomes.xml");
-    IncomeMenager incomeMenager("incomes.xml", 1);
+    ExpenseMenager expenseMenager("expenses.xml", 1);
 
-    incomeMenager.sortIncomesByDate();
+    expenseMenager.addNewExpense();
 
     return 0;
 }
