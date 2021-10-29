@@ -9,13 +9,11 @@ using namespace std;
 
 int main()
 {
-    MyBudget myBudget("users.xml", "incomes.xml");
+    //MyBudget myBudget("users.xml", "incomes.xml");
+    IncomeMenager incomeMenager("incomes.xml", 1);
 
-    myBudget.userLogin();
-    myBudget.addNewIncome();
-    myBudget.addNewIncome();
-    myBudget.addNewIncome();
-    myBudget.displayIncomes();
+    incomeMenager.displayIncomes();
+    cout << "Suma przychodow wynosi: " << incomeMenager.sumIncomes() << " zl";
 
     return 0;
 }

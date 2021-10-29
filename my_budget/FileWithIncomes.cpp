@@ -1,5 +1,6 @@
 #include "FileWithIncomes.h"
 #include "AccessoryMethods.h"
+#include "CashValueMenager.h"
 #include "Income.h"
 #include "Markup.h"
 
@@ -28,8 +29,6 @@ void FileWithIncomes::addIncomeToFile(Income income)
     xml.AddElem("Amount", income.getAmount());
 
     xml.Save(getFileName());
-
-
 }
 
 string FileWithIncomes::conversionDateToString(int date)
@@ -54,4 +53,45 @@ string FileWithIncomes::conversionDateToString(int date)
     dateInString = year + "-" +month + "-" + day;
 
     return dateInString;
+}
+
+vector<Income> FileWithIncomes::loadIncomesFromFile(int ID_NUMBER_OF_LOGGED_IN_USER)
+{
+    CMarkup xml;
+
+    bool fileExists = xml.Load(getFileName());
+
+    Income income;
+    int date;
+    float amount;
+
+    xml.ResetPos();
+    xml.FindElem();
+    xml.IntoElem();
+
+    if (fileExists)
+    {
+        while ( xml.FindElem("Income") )
+        {
+        xml.IntoElem();
+        xml.FindElem("IncomeId");
+        income.setIncomeId(atoi( MCD_2PCSZ(xml.GetData())));
+        xml.FindElem("UserId");
+        income.setUserId(atoi( MCD_2PCSZ(xml.GetData())));
+        xml.FindElem("Date");
+        date = cashValueMenager.conversionDateToInteger(xml.GetData());
+        income.setDate(date);
+        xml.FindElem("Item");
+        income.setItem(xml.GetData());
+        xml.FindElem("Amount");
+        amount = cashValueMenager.conversionStringToFloat(xml.GetData());
+        income.setAmount(amount);
+        incomes.push_back(income);
+        xml.OutOfElem();
+        }
+    }
+    else
+        cout << "Blad pliku!" << endl;
+
+    return incomes;
 }
