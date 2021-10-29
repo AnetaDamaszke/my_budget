@@ -3,17 +3,16 @@
 #include "MyBudget.h"
 #include "FileWithUsers.h"
 #include "UserMenager.h"
+#include "IncomeMenager.h"
 
 using namespace std;
 
 int main()
 {
-    MyBudget myBudget("users.xml");
-    FileWithUsers fileWithUsers("users.xml");
+    //MyBudget myBudget("users.xml", "incomes.xml");
+    IncomeMenager incomeMenager("incomes.xml", 1);
 
-    //fileWithUsers.loadUsersFromFile();
-    myBudget.userLogin();
-    myBudget.changePasswordOfLoggedInUser();
+    incomeMenager.sortIncomesByDate();
 
     return 0;
 }
