@@ -27,7 +27,6 @@ public:
     };
     void addNewExpense();
     void displayAllExpenses();
-    //float sumExpenses();
     void sortExpensesByDate();
     float getExpensesFromCurrenthMonth();
     float getExpensesFromLastMonth();

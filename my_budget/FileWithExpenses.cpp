@@ -29,30 +29,6 @@ void FileWithExpenses::addExpenseToFile(Expense expense)
     xml.Save(getFileName());
 }
 
-string FileWithExpenses::conversionDateToString(int date)
-{
-    string dateInString;
-    string year, month, day;
-
-    dateInString = AccessoryMethods::conversionIntToString(date);
-
-    year = dateInString.substr(0,4);
-
-    month = dateInString.substr(4,2);
-
-    if(month.size() == 1)
-        month = "0" + month;
-
-    day = dateInString.substr(6,2);
-
-    if(day.size() == 1)
-        day = "0" + day;
-
-    dateInString = year + "-" +month + "-" + day;
-
-    return dateInString;
-}
-
 vector<Expense> FileWithExpenses::loadExpensesFromFile(int ID_NUMBER_OF_LOGGED_IN_USER)
 {
     CMarkup xml;
@@ -60,32 +36,39 @@ vector<Expense> FileWithExpenses::loadExpensesFromFile(int ID_NUMBER_OF_LOGGED_I
     bool fileExists = xml.Load(getFileName());
 
     Expense expense;
+    int loggedInUser;
     int date;
     float amount;
 
-    xml.ResetPos();
-    xml.FindElem();
-    xml.IntoElem();
-
-    if (fileExists)
+    if(fileExists)
     {
-        while ( xml.FindElem("Expense") )
-        {
+        xml.ResetPos();
+        xml.FindElem();
         xml.IntoElem();
-        xml.FindElem("ExpenseId");
-        expense.setExpenseId(atoi( MCD_2PCSZ(xml.GetData())));
-        xml.FindElem("UserId");
-        expense.setUserId(atoi( MCD_2PCSZ(xml.GetData())));
-        xml.FindElem("Date");
-        date = cashValueMenager.conversionDateToInteger(xml.GetData());
-        expense.setDate(date);
-        xml.FindElem("Item");
-        expense.setItem(xml.GetData());
-        xml.FindElem("Amount");
-        amount = cashValueMenager.conversionStringToFloat(xml.GetData());
-        expense.setAmount(amount);
-        expenses.push_back(expense);
-        xml.OutOfElem();
+
+        while( xml.FindElem("Expense") )
+        {
+            xml.IntoElem();
+            xml.FindElem("UserId");
+            loggedInUser = atoi(MCD_2PCSZ(xml.GetData()));
+
+            if(loggedInUser == ID_NUMBER_OF_LOGGED_IN_USER)
+            {
+                xml.FindElem("IncomeId");
+                expense.setExpenseId(atoi( MCD_2PCSZ(xml.GetData())));
+                xml.FindElem("UserId");
+                expense.setUserId(atoi( MCD_2PCSZ(xml.GetData())));
+                xml.FindElem("Date");
+                date = cashValueMenager.conversionDateToInteger(xml.GetData());
+                expense.setDate(date);
+                xml.FindElem("Item");
+                expense.setItem(xml.GetData());
+                xml.FindElem("Amount");
+                amount = cashValueMenager.conversionStringToFloat(xml.GetData());
+                expense.setAmount(amount);
+                expenses.push_back(expense);
+            }
+            xml.OutOfElem();
         }
     }
     else

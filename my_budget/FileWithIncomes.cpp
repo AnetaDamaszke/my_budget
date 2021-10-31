@@ -36,32 +36,39 @@ vector<Income> FileWithIncomes::loadIncomesFromFile(int ID_NUMBER_OF_LOGGED_IN_U
     bool fileExists = xml.Load(getFileName());
 
     Income income;
+    int loggedInUser;
     int date;
     float amount;
 
-    xml.ResetPos();
-    xml.FindElem();
-    xml.IntoElem();
-
-    if (fileExists)
+    if(fileExists)
     {
-        while ( xml.FindElem("Income") )
-        {
+        xml.ResetPos();
+        xml.FindElem();
         xml.IntoElem();
-        xml.FindElem("IncomeId");
-        income.setIncomeId(atoi( MCD_2PCSZ(xml.GetData())));
-        xml.FindElem("UserId");
-        income.setUserId(atoi( MCD_2PCSZ(xml.GetData())));
-        xml.FindElem("Date");
-        date = cashValueMenager.conversionDateToInteger(xml.GetData());
-        income.setDate(date);
-        xml.FindElem("Item");
-        income.setItem(xml.GetData());
-        xml.FindElem("Amount");
-        amount = cashValueMenager.conversionStringToFloat(xml.GetData());
-        income.setAmount(amount);
-        incomes.push_back(income);
-        xml.OutOfElem();
+
+        while( xml.FindElem("Income") )
+        {
+            xml.IntoElem();
+            xml.FindElem("UserId");
+            loggedInUser = atoi(MCD_2PCSZ(xml.GetData()));
+
+            if(loggedInUser == ID_NUMBER_OF_LOGGED_IN_USER)
+            {
+                xml.FindElem("IncomeId");
+                income.setIncomeId(atoi( MCD_2PCSZ(xml.GetData())));
+                xml.FindElem("UserId");
+                income.setUserId(atoi( MCD_2PCSZ(xml.GetData())));
+                xml.FindElem("Date");
+                date = cashValueMenager.conversionDateToInteger(xml.GetData());
+                income.setDate(date);
+                xml.FindElem("Item");
+                income.setItem(xml.GetData());
+                xml.FindElem("Amount");
+                amount = cashValueMenager.conversionStringToFloat(xml.GetData());
+                income.setAmount(amount);
+                incomes.push_back(income);
+            }
+            xml.OutOfElem();
         }
     }
     else

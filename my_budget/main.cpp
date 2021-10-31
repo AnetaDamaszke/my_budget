@@ -67,3 +67,21 @@ int main()
 
     return 0;
 }
+
+//------TESTY
+
+#include "IncomeMenager.h"
+#include "ExpenseMenager.h"
+#include "FileWithIncomes.h"
+#include "FileWithExpenses.h"
+
+int __main()
+{
+    IncomeMenager incomeMenager("incomes.xml", 2);
+    ExpenseMenager expenseMenager("expenses.xml", 2);
+    FileWithIncomes fileWithIncomes("incomes.xml");
+    FileWithExpenses fileWithExpenses("expenses.xml");
+
+    fileWithExpenses.loadExpensesFromFile(2);
+    expenseMenager.displayAllExpenses();
+}

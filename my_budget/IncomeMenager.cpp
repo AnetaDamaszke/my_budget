@@ -70,18 +70,6 @@ int IncomeMenager::getIdNumberOfLoggedInUser()
     return ID_NUMBER_OF_LOGGED_IN_USER;
 }
 
-//float IncomeMenager::sumIncomes()
-//{
-//    float sumIncomes = 0;
-//
-//    for(int i=0; i<incomes.size(); i++)
-//    {
-//        sumIncomes += incomes[i].getAmount();
-//    }
-//
-//    return sumIncomes;
-//}
-
 void IncomeMenager::sortIncomesByDate()
 {
     sort(incomes.begin(), incomes.end());

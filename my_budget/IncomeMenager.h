@@ -27,7 +27,6 @@ public:
     };
     void addNewIncome();
     void displayAllIncomes();
-    //float sumIncomes();
     void sortIncomesByDate();
     float getIncomesFromCurrenthMonth();
     float getIncomesFromLastMonth();

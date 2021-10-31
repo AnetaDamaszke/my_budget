@@ -70,18 +70,6 @@ int ExpenseMenager::getIdNumberOfLoggedInUser()
     return ID_NUMBER_OF_LOGGED_IN_USER;
 }
 
-//float ExpenseMenager::sumExpenses()
-//{
-//    float sumExpenses = 0;
-//
-//    for(int i=0; i<expenses.size(); i++)
-//    {
-//        sumExpenses += expenses[i].getAmount();
-//    }
-//
-//    return sumExpenses;
-//}
-
 void ExpenseMenager::sortExpensesByDate()
 {
     sort(expenses.begin(), expenses.end());
