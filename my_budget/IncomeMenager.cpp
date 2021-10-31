@@ -136,3 +136,25 @@ float IncomeMenager::getIncomesFromLastMonth()
     }
     return sumIncomes;
 }
+
+float IncomeMenager::getIncomesFromSelectedDate(string firstDateStr, string secondDateStr)
+{
+    float sumIncomes;
+
+    int firstDate = conversionDateToInteger(firstDateStr);
+    int secondDate = conversionDateToInteger(secondDateStr);
+
+    sortIncomesByDate();
+
+    for(int i=0; i < incomes.size(); i++)
+    {
+        int incomeDate = incomes[i].getDate();
+
+        if((incomeDate >= firstDate) && (incomeDate <= secondDate))
+        {
+            cout << incomes[i].getAmount() << " - " << incomes[i].getItem() << " - " << conversionDateToString(incomes[i].getDate()) << endl;
+            sumIncomes += incomes[i].getAmount();
+        }
+    }
+    return sumIncomes;
+}

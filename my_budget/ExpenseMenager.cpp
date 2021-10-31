@@ -139,3 +139,26 @@ float ExpenseMenager::getExpensesFromLastMonth()
 
     return sumExpenses;
 }
+
+float ExpenseMenager::getExpensesFromSelectedDate(string firstDateStr, string secondDateStr)
+{
+    float sumExpenses;
+
+    int firstDate = conversionDateToInteger(firstDateStr);
+    int secondDate = conversionDateToInteger(secondDateStr);
+
+    sortExpensesByDate();
+
+    for(int i=0; i < expenses.size(); i++)
+    {
+        int expenseDate = expenses[i].getDate();
+
+        if((expenseDate >= firstDate) && (expenseDate <= secondDate))
+        {
+            cout << expenses[i].getAmount() << " - " << expenses[i].getItem() << " - " << conversionDateToString(expenses[i].getDate()) << endl;
+            sumExpenses += expenses[i].getAmount();
+        }
+    }
+
+    return sumExpenses;
+}

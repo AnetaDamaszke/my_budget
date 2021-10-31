@@ -31,6 +31,7 @@ public:
     void sortIncomesByDate();
     float getIncomesFromCurrenthMonth();
     float getIncomesFromLastMonth();
+    float getIncomesFromSelectedDate(string firstDate, string secondDate);
 };
 
 #endif

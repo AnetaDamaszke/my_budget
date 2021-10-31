@@ -4,9 +4,9 @@
 #include <iostream>
 
 #include "UserMenager.h"
-#include "FileWithUsers.h"
 #include "IncomeMenager.h"
 #include "ExpenseMenager.h"
+#include "CashValueMenager.h"
 
 using namespace std;
 
@@ -44,7 +44,7 @@ public:
     char selectOptionFromUserMenu();
     void displayBalanceSheetForCurrentMonth();
     void displayBalanceSheetForLastMonth();
-    void displayBalanceSheetForSelectionDate();
+    void displayBalanceSheetForSelectedDate();
 };
 
 #endif

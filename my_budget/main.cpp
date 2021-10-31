@@ -53,7 +53,7 @@ int main()
                 myBudget.displayBalanceSheetForLastMonth();
                 break;
             case '5':
-                //myBudget.displayBalanceSheetForLastMonth();
+                myBudget.displayBalanceSheetForSelectedDate();
                 break;
             case '6':
                 myBudget.changePasswordOfLoggedInUser();
@@ -64,7 +64,6 @@ int main()
             }
         }
     }
-
 
     return 0;
 }
