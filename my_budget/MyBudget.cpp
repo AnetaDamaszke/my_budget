@@ -96,3 +96,50 @@ char MyBudget::selectOptionFromUserMenu()
 
     return choice;
 }
+
+void MyBudget::displayBalanceSheetForCurrentMonth()
+{
+    float sumIncomes, sumExpenses;
+
+    system("cls");
+    cout << ">>BILANS Z BIEZACEGO MIESIACA<< " << endl;
+    cout << "-------------------------------" << endl;
+    cout << "PRZYCHODY:" << endl;
+    sumIncomes = incomeMenager->getIncomesFromCurrenthMonth();
+    cout << endl;
+    cout << "WYDATKI:" << endl;
+    sumExpenses = expenseMenager->getExpensesFromCurrenthMonth();
+    cout << "-------------------------------" << endl;
+    cout<< "Suma przychodow: " << sumIncomes << endl;
+    cout<< "Suma wydatkow: " << sumExpenses << endl;
+    cout << "-------------------------------" << endl;
+    cout<< "Roznica: " << sumIncomes - sumExpenses << endl;
+    cout << endl;
+    system("pause");
+}
+
+void MyBudget::displayBalanceSheetForLastMonth()
+{
+    float sumIncomes, sumExpenses;
+
+    system("cls");
+    cout << ">>BILANS Z BIEZACEGO MIESIACA<< " << endl;
+    cout << "-------------------------------" << endl;
+    cout << "PRZYCHODY:" << endl;
+    sumIncomes = incomeMenager->getIncomesFromLastMonth();
+    cout << endl;
+    cout << "WYDATKI:" << endl;
+    sumExpenses = expenseMenager->getExpensesFromLastMonth();
+    cout << "-------------------------------" << endl;
+    cout<< "Suma przychodow: " << sumIncomes << endl;
+    cout<< "Suma wydatkow: " << sumExpenses << endl;
+    cout << "-------------------------------" << endl;
+    cout<< "Roznica: " << sumIncomes - sumExpenses << endl;
+    cout << endl;
+    system("pause");
+}
+
+//void MyBudget::displayBalanceSheetForSelectionDate()
+//{
+//
+//}

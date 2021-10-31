@@ -46,16 +46,14 @@ Expense ExpenseMenager::getDataOfNewExpense()
     return expense;
 }
 
-void ExpenseMenager::displayExpenses()
+void ExpenseMenager::displayAllExpenses()
 {
+    sort(expenses.begin(), expenses.end());
+
+    cout << "WYDATKI:" << endl;
     for(int i=0; i<expenses.size(); i++)
     {
-        cout << expenses[i].getExpenseId() << endl;
-        cout << expenses[i].getUserId() << endl;
-        cout << fileWithExpenses.conversionDateToString(expenses[i].getDate()) << endl;
-        cout << expenses[i].getItem() << endl;
-        cout << expenses[i].getAmount() << endl;
-        cout << endl;
+        cout << expenses[i].getAmount() << " - " << expenses[i].getItem() << endl;
     }
 }
 
@@ -72,24 +70,72 @@ int ExpenseMenager::getIdNumberOfLoggedInUser()
     return ID_NUMBER_OF_LOGGED_IN_USER;
 }
 
-float ExpenseMenager::sumExpenses()
-{
-    float sumExpenses = 0;
+//float ExpenseMenager::sumExpenses()
+//{
+//    float sumExpenses = 0;
+//
+//    for(int i=0; i<expenses.size(); i++)
+//    {
+//        sumExpenses += expenses[i].getAmount();
+//    }
+//
+//    return sumExpenses;
+//}
 
-    for(int i=0; i<expenses.size(); i++)
+void ExpenseMenager::sortExpensesByDate()
+{
+    sort(expenses.begin(), expenses.end());
+}
+
+float ExpenseMenager::getExpensesFromCurrenthMonth()
+{
+    float sumExpenses;
+    string currentDate = getCurrentDate();
+    int currentMonth = getMonth(currentDate);
+
+    sortExpensesByDate();
+
+    for(int i=0; i < expenses.size(); i++)
     {
-        sumExpenses += expenses[i].getAmount();
+        string expenseDate = conversionDateToString(expenses[i].getDate());
+
+        int expenseMonth = getMonth(expenseDate);
+
+        if(expenseMonth == currentMonth)
+        {
+            cout << expenses[i].getAmount() << " - " << expenses[i].getItem() << endl;
+            sumExpenses += expenses[i].getAmount();
+        }
     }
 
     return sumExpenses;
 }
 
-void ExpenseMenager::sortExpensesByDate()
+float ExpenseMenager::getExpensesFromLastMonth()
 {
-    sort(expenses.begin(), expenses.end());
+    float sumExpenses;
+    string currentDate = getCurrentDate();
+    int lastMonth = getMonth(currentDate) - 1;
+
+    if(getMonth(currentDate) == 1)
+    {
+        lastMonth = 12;
+    }
+
+    sortExpensesByDate();
 
     for(int i=0; i < expenses.size(); i++)
     {
-        cout << fileWithExpenses.conversionDateToString(expenses[i].getDate()) << ": " << expenses[i].getAmount() <<  " zl" << endl;
+        string expenseDate = conversionDateToString(expenses[i].getDate());
+
+        int expenseMonth = getMonth(expenseDate);
+
+        if(expenseMonth == lastMonth)
+        {
+            cout << expenses[i].getAmount() << " - " << expenses[i].getItem() << endl;
+            sumExpenses += expenses[i].getAmount();
+        }
     }
+
+    return sumExpenses;
 }

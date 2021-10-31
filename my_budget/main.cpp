@@ -47,10 +47,10 @@ int main()
                 myBudget.addNewExpense();
                 break;
             case '3':
-                //myBudget.displayBalanceSheetForCurrentMonth();
+                myBudget.displayBalanceSheetForCurrentMonth();
                 break;
             case '4':
-                //myBudget.displayBalanceSheetForLastMonth();
+                myBudget.displayBalanceSheetForLastMonth();
                 break;
             case '5':
                 //myBudget.displayBalanceSheetForLastMonth();

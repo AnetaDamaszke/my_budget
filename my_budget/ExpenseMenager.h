@@ -26,9 +26,11 @@ public:
         expenses = fileWithExpenses.loadExpensesFromFile(ID_NUMBER_OF_LOGGED_IN_USER);
     };
     void addNewExpense();
-    void displayExpenses();
-    float sumExpenses();
+    void displayAllExpenses();
+    //float sumExpenses();
     void sortExpensesByDate();
+    float getExpensesFromCurrenthMonth();
+    float getExpensesFromLastMonth();
 };
 
 #endif

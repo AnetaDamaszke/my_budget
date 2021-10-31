@@ -26,9 +26,11 @@ public:
         incomes = fileWithIncomes.loadIncomesFromFile(ID_NUMBER_OF_LOGGED_IN_USER);
     };
     void addNewIncome();
-    void displayIncomes();
-    float sumIncomes();
+    void displayAllIncomes();
+    //float sumIncomes();
     void sortIncomesByDate();
+    float getIncomesFromCurrenthMonth();
+    float getIncomesFromLastMonth();
 };
 
 #endif

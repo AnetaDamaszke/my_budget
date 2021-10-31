@@ -100,16 +100,6 @@ void CashValueMenager::compareTheDates()
         cout << "Wczeniejsza jest data " << firstDateInTheSpecifiedFormat << endl;
 }
 
-string CashValueMenager::getDateInTheSpecifiedFormat()
-{
-    string dateInTheSpecifiedFormat;
-
-    cout << "Podaj date w formacie RRRR-MM-DD: ";
-    cin >> dateInTheSpecifiedFormat;
-
-    return dateInTheSpecifiedFormat;
-}
-
 int CashValueMenager::getYear(string date)
 {
     int year;
@@ -234,26 +224,21 @@ int CashValueMenager::conversionDateToInteger(string date)
 
     dayStr = date.substr(8,2);
 
-    if( dayStr[0] == '0')
-    {
-        dayStr = dayStr.substr(1,1);
-    }
+//    if( dayStr[0] == '0')
+//    {
+//        dayStr = dayStr.substr(1,1);
+//    }
 
     monthStr = date.substr(5,2);
 
-    if( monthStr[0] == '0')
-    {
-        monthStr = monthStr.substr(1,1);
-    }
+//    if( monthStr[0] == '0')
+//    {
+//        monthStr = monthStr.substr(1,1);
+//    }
 
     yearStr = date.substr(0,4);
 
-    if(isDateCorrect(date) == true)
-    {
-        dateInNewFormat = yearStr + monthStr + dayStr;
-    }
-    else
-        cout << "Bledna data";
+    dateInNewFormat = yearStr + monthStr + dayStr;
 
     dateInInteger = AccessoryMethods::conversionStringToInt(dateInNewFormat);
 
@@ -271,13 +256,13 @@ string CashValueMenager::conversionDateToString(int date)
 
     month = dateInString.substr(4,2);
 
-    if(month.size() == 1)
-        month = "0" + month;
+//    if(month.size() == 1)
+//        month = "0" + month;
 
     day = dateInString.substr(6,2);
 
-    if(day.size() == 1)
-        day = "0" + day;
+//    if(day.size() == 1)
+//        day = "0" + day;
 
     dateInString = year + "-" +month + "-" + day;
 

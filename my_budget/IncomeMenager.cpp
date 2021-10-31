@@ -46,16 +46,14 @@ Income IncomeMenager::getDataOfNewIncome()
     return income;
 }
 
-void IncomeMenager::displayIncomes()
+void IncomeMenager::displayAllIncomes()
 {
+    sort(incomes.begin(), incomes.end());
+
+    cout << "PRZYCHODY:" << endl;
     for(int i=0; i<incomes.size(); i++)
     {
-        cout << incomes[i].getIncomeId() << endl;
-        cout << incomes[i].getUserId() << endl;
-        cout << conversionDateToString(incomes[i].getDate()) << endl;
-        cout << incomes[i].getItem() << endl;
-        cout << incomes[i].getAmount() << endl;
-        cout << endl;
+        cout << incomes[i].getAmount() << " - " << incomes[i].getItem() << endl;
     }
 }
 
@@ -72,24 +70,69 @@ int IncomeMenager::getIdNumberOfLoggedInUser()
     return ID_NUMBER_OF_LOGGED_IN_USER;
 }
 
-float IncomeMenager::sumIncomes()
-{
-    float sumIncomes = 0;
-
-    for(int i=0; i<incomes.size(); i++)
-    {
-        sumIncomes += incomes[i].getAmount();
-    }
-
-    return sumIncomes;
-}
+//float IncomeMenager::sumIncomes()
+//{
+//    float sumIncomes = 0;
+//
+//    for(int i=0; i<incomes.size(); i++)
+//    {
+//        sumIncomes += incomes[i].getAmount();
+//    }
+//
+//    return sumIncomes;
+//}
 
 void IncomeMenager::sortIncomesByDate()
 {
     sort(incomes.begin(), incomes.end());
+}
+
+float IncomeMenager::getIncomesFromCurrenthMonth()
+{
+    float sumIncomes = 0;
+    string currentDate = getCurrentDate();
+    int currentMonth = getMonth(currentDate);
+
+    sort(incomes.begin(), incomes.end());
 
     for(int i=0; i < incomes.size(); i++)
     {
-        cout << conversionDateToString(incomes[i].getDate()) << ": " << incomes[i].getAmount() <<  " zl" << endl;
+        string incomeDate = conversionDateToString(incomes[i].getDate());
+
+        int incomeMonth = getMonth(incomeDate);
+
+        if(incomeMonth == currentMonth)
+        {
+            cout << incomes[i].getAmount() << " - " << incomes[i].getItem() << endl;
+            sumIncomes += incomes[i].getAmount();
+        }
     }
+    return sumIncomes;
+}
+
+float IncomeMenager::getIncomesFromLastMonth()
+{
+    float sumIncomes = 0;
+    string currentDate = getCurrentDate();
+    int lastMonth = getMonth(currentDate) - 1;
+
+    if(getMonth(currentDate) == 1)
+    {
+        lastMonth = 12;
+    }
+
+    sortIncomesByDate();
+
+    for(int i=0; i < incomes.size(); i++)
+    {
+        string incomeDate = conversionDateToString(incomes[i].getDate());
+        int incomeMonth = getMonth(incomeDate);
+
+        if(incomeMonth == lastMonth)
+        {
+            cout << incomes[i].getAmount() << " - " << incomes[i].getItem() << endl;
+            sumIncomes += incomes[i].getAmount();
+        }
+    }
+    return sumIncomes;
 }
