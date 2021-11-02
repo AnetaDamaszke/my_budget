@@ -23,14 +23,28 @@ Income IncomeMenager::getDataOfNewIncome()
     string date, item, amount;
     float amountFl;
     int dateInt;
+    char choice;
 
-    cout << "Podaj date przychodu w formacie RRRR-MM-DD: ";
-    date = AccessoryMethods::getLine();
+    cout << "Czy chcesz dodac przychod z dzisiejsza data? t/n: ";
+    choice = AccessoryMethods::getSign();
 
-    if(isDateCorrect(date))
+    if(choice == 't')
     {
+        date = getCurrentDate();
+        cout << "Dzisiejsza data: " << date << endl;
         dateInt = conversionDateToInteger(date);
         income.setDate(dateInt);
+    }
+    else if(choice == 'n')
+    {
+        cout << "Podaj date przychodu w formacie RRRR-MM-DD: ";
+        date = AccessoryMethods::getLine();
+
+        if(isDateCorrect(date))
+        {
+            dateInt = conversionDateToInteger(date);
+            income.setDate(dateInt);
+        }
     }
 
     cout << "Podaj nazwe przychodu: ";

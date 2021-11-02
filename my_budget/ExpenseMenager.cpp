@@ -23,14 +23,28 @@ Expense ExpenseMenager::getDataOfNewExpense()
     string date, item, amount;
     float amountFl;
     int dateInt;
+    char choice;
 
-    cout << "Podaj date wydatku w formacie RRRR-MM-DD: ";
-    date = AccessoryMethods::getLine();
+    cout << "Czy chcesz dodac wydatek z dzisiejsza data? t/n: ";
+    choice = AccessoryMethods::getSign();
 
-    if(isDateCorrect(date))
+    if(choice == 't')
     {
+        date = getCurrentDate();
+        cout << "Dzisiejsza data: " << date << endl;
         dateInt = conversionDateToInteger(date);
         expense.setDate(dateInt);
+    }
+    else if(choice == 'n')
+    {
+        cout << "Podaj date wydatku w formacie RRRR-MM-DD: ";
+        date = AccessoryMethods::getLine();
+
+        if(isDateCorrect(date))
+        {
+            dateInt = conversionDateToInteger(date);
+            expense.setDate(dateInt);
+        }
     }
 
     cout << "Podaj nazwe wydatku: ";

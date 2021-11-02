@@ -155,13 +155,13 @@ string CashValueMenager::getCurrentDate()
     currentYear = AccessoryMethods::conversionIntToString(st.wYear);
     currentMonth = AccessoryMethods::conversionIntToString(st.wMonth);
 
-    if(st.wMonth < 10)
+    if(st.wMonth <= 9)
         currentMonth = "0" + currentMonth;
 
     currentDay = AccessoryMethods::conversionIntToString(st.wDay);
 
-    if(st.wDay < 10)
-        currentMonth = "0" + currentMonth;
+    if(st.wDay <= 9)
+        currentDay = "0" + currentDay;
 
     currentDate = currentYear + "-" + currentMonth + "-" + currentDay;
 
@@ -199,11 +199,6 @@ bool CashValueMenager::isDateCorrect(string date)
     if((year < 2000))
     {
         cout << "Bledna data. Podaj date po 2000-01-01" << endl;
-        return false;
-    }
-    else if(year > currentYear)
-    {
-        cout << "Bledna data. Podaj date przed ostatnim dniem biezaego miesiaca." << endl;
         return false;
     }
     else if((year == currentYear) && (month > currentMonth))
