@@ -3,18 +3,15 @@
 
 bool CashValueMenager::isYearLeapYear(int year)
 {
-    if((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
-        return true;
-    else
-        return false;
+    return ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0));
 }
 
-int CashValueMenager::howManyDaysIsTheCurrentMonth()
+int CashValueMenager::getNumberDaysInMonth(string date)
 {
     int howManyDays;
 
-    int year = getYear(getCurrentDate());
-    int month = getMonth(getCurrentDate());
+    int year = getYear(date);
+    int month = getMonth(date);
 
     if (month == 4 || month == 6 || month == 9 || month == 11)
         howManyDays = 30;
@@ -31,151 +28,57 @@ int CashValueMenager::howManyDaysIsTheCurrentMonth()
     howManyDays = 31;
 
     return howManyDays;
-}
-
-int CashValueMenager::howManyDaysIsTheLastMonth()
-{
-    int howManyDays;
-
-    int year = getYear(getCurrentDate());
-    int month;
-
-    if(getMonth(getCurrentDate()) == 1)
-        month = 12;
-    else
-        month = getMonth(getCurrentDate()) - 1;
-
-    if (month == 4 || month == 6 || month == 9 || month == 11)
-        howManyDays = 30;
-    else if (month == 02)
-    {
-        bool leapYear = isYearLeapYear(year);
-
-        if (!leapYear)
-                howManyDays = 28;
-        else
-                howManyDays = 29;
-    }
-    else
-    howManyDays = 31;
-
-    return howManyDays;
-}
-
-void CashValueMenager::compareTheDates()
-{
-    string firstDateInTheSpecifiedFormat, secondDateInTheSpecifiedFormat;
-
-    cout << "Podaj pierwsza date w formacie RRRR-MM-DD: ";
-    cin >> firstDateInTheSpecifiedFormat;
-    cout << "Podaj druga date w formacie RRRR-MM-DD: ";
-    cin >> secondDateInTheSpecifiedFormat;
-
-    int year1 = getYear(firstDateInTheSpecifiedFormat);
-    int month1 = getMonth(firstDateInTheSpecifiedFormat);
-    int day1 = getDay(firstDateInTheSpecifiedFormat);
-    int year2 = getYear(secondDateInTheSpecifiedFormat);
-    int month2 = getMonth(secondDateInTheSpecifiedFormat);
-    int day2 = getDay(secondDateInTheSpecifiedFormat);
-
-    if( year1 > year2)
-    {
-        cout << "Wczeniejsza jest data " << secondDateInTheSpecifiedFormat << endl;
-    }
-    else if( year1 == year2)
-    {
-        if(month1 > month2)
-            cout << "Wczeniejsza jest data " << secondDateInTheSpecifiedFormat << endl;
-        else if(month1 == month2)
-        {
-            if(day1 > day2)
-                cout << "Wczeniejsza jest data " << secondDateInTheSpecifiedFormat << endl;
-            else
-                cout << "Wczeniejsza jest data " << firstDateInTheSpecifiedFormat << endl;
-        }
-        else
-            cout << "Wczeniejsza jest data " << firstDateInTheSpecifiedFormat << endl;
-    }
-    else
-        cout << "Wczeniejsza jest data " << firstDateInTheSpecifiedFormat << endl;
 }
 
 int CashValueMenager::getYear(string date)
 {
-    int year;
-
-    year = AccessoryMethods::conversionStringToInt(date.substr(0,4));
-
-    return year;
+    return AccessoryMethods::conversionStringToInt(date.substr(0,4));
 }
 
 int CashValueMenager::getMonth(string date)
 {
-    string monthStr;
-    int month;
-
-    monthStr = date.substr(5,2);
+    string monthStr = date.substr(5,2);
 
     if( monthStr[0] == '0')
-    {
         monthStr = monthStr.substr(1,1);
-    }
 
-    month = AccessoryMethods::conversionStringToInt(monthStr);
-
-    return month;
+    return AccessoryMethods::conversionStringToInt(monthStr);
 }
 
 int CashValueMenager::getDay(string date)
 {
-    string dayStr;
-    int day;
-
-    dayStr = date.substr(8,2);
+    string dayStr = date.substr(8,2);
 
     if( dayStr[0] == '0')
-    {
         dayStr = dayStr.substr(1,1);
-    }
 
-    day = AccessoryMethods::conversionStringToInt(dayStr);
-
-    return day;
+    return AccessoryMethods::conversionStringToInt(dayStr);
 }
 
 string CashValueMenager::getCurrentDate()
 {
-    string currentDate;
-
     SYSTEMTIME st;
     GetSystemTime(&st);
 
-    string currentYear, currentMonth, currentDay;
-
-    currentYear = AccessoryMethods::conversionIntToString(st.wYear);
-    currentMonth = AccessoryMethods::conversionIntToString(st.wMonth);
+    string currentYear = AccessoryMethods::conversionIntToString(st.wYear);
+    string currentMonth = AccessoryMethods::conversionIntToString(st.wMonth);
+    string currentDay = AccessoryMethods::conversionIntToString(st.wDay);
 
     if(st.wMonth <= 9)
         currentMonth = "0" + currentMonth;
 
-    currentDay = AccessoryMethods::conversionIntToString(st.wDay);
-
     if(st.wDay <= 9)
         currentDay = "0" + currentDay;
 
-    currentDate = currentYear + "-" + currentMonth + "-" + currentDay;
-
-    return currentDate;
+    return (currentYear + "-" + currentMonth + "-" + currentDay);
 }
 
 string CashValueMenager::changeAmountToCorrect(string amount)
 {
-    for(int i; i < amount.size(); i++)
+    for(int i = 0; i < amount.size(); i++)
     {
         if(amount[i] == ',')
-        {
             amount[i] = '.';
-        }
     }
 
     return amount;
@@ -183,18 +86,18 @@ string CashValueMenager::changeAmountToCorrect(string amount)
 
 float CashValueMenager::conversionStringToFloat(string num)
 {
-    float amount = atof(num.c_str());
-
-    return amount;
+    return atof(num.c_str());
 }
 
 bool CashValueMenager::isDateCorrect(string date)
 {
     int year = getYear(date);
     int month = getMonth(date);
+    int day = getDay(date);
 
     int currentYear = getYear(getCurrentDate());
     int currentMonth = getMonth(getCurrentDate());
+    int numberDaysInMonth = getNumberDaysInMonth(date);
 
     if((year < 2000))
     {
@@ -206,38 +109,31 @@ bool CashValueMenager::isDateCorrect(string date)
         cout << "Bledna data. Podaj date przed ostatnim dniem biezaego miesiaca." << endl;
         return false;
     }
-    else
-        return true;
+    else if(day > numberDaysInMonth)
+    {
+        cout << "Bledna data. Podaj poprawna date." << endl;
+        return false;
+    }
+    else if((date[4] != '-') || (date[7] != '-'))
+    {
+        cout << "Bledny format daty. Sprobuj jeszcze raz." << endl;
+        return false;
+    }
+    return true;
 }
 
 int CashValueMenager::conversionDateToInteger(string date)
 {
-    int dateInInteger;
-
     string dateInNewFormat;
     string dayStr, monthStr, yearStr;
 
     dayStr = date.substr(8,2);
-
-//    if( dayStr[0] == '0')
-//    {
-//        dayStr = dayStr.substr(1,1);
-//    }
-
     monthStr = date.substr(5,2);
-
-//    if( monthStr[0] == '0')
-//    {
-//        monthStr = monthStr.substr(1,1);
-//    }
-
     yearStr = date.substr(0,4);
 
     dateInNewFormat = yearStr + monthStr + dayStr;
 
-    dateInInteger = AccessoryMethods::conversionStringToInt(dateInNewFormat);
-
-    return dateInInteger;
+    return AccessoryMethods::conversionStringToInt(dateInNewFormat);
 }
 
 string CashValueMenager::conversionDateToString(int date)
@@ -248,18 +144,10 @@ string CashValueMenager::conversionDateToString(int date)
     dateInString = AccessoryMethods::conversionIntToString(date);
 
     year = dateInString.substr(0,4);
-
     month = dateInString.substr(4,2);
-
-//    if(month.size() == 1)
-//        month = "0" + month;
-
     day = dateInString.substr(6,2);
 
-//    if(day.size() == 1)
-//        day = "0" + day;
-
-    dateInString = year + "-" +month + "-" + day;
+    dateInString = year + "-" + month + "-" + day;
 
     return dateInString;
 }

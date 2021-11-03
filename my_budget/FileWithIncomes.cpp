@@ -76,3 +76,44 @@ vector<Income> FileWithIncomes::loadIncomesFromFile(int ID_NUMBER_OF_LOGGED_IN_U
 
     return incomes;
 }
+
+vector<Income> FileWithIncomes::loadAllIncomesIdFromFile()
+{
+    CMarkup xml;
+
+    bool fileExists = xml.Load(getFileName());
+
+    Income income;
+    int date;
+    float amount;
+
+    if(fileExists)
+    {
+        xml.ResetPos();
+        xml.FindElem();
+        xml.IntoElem();
+
+        while( xml.FindElem("Income") )
+        {
+            xml.IntoElem();
+            xml.FindElem("IncomeId");
+            income.setIncomeId(atoi( MCD_2PCSZ(xml.GetData())));
+            xml.FindElem("UserId");
+            income.setUserId(atoi( MCD_2PCSZ(xml.GetData())));
+            xml.FindElem("Date");
+            date = cashValueMenager.conversionDateToInteger(xml.GetData());
+            income.setDate(date);
+            xml.FindElem("Item");
+            income.setItem(xml.GetData());
+            xml.FindElem("Amount");
+            amount = cashValueMenager.conversionStringToFloat(xml.GetData());
+            income.setAmount(amount);
+            incomes.push_back(income);
+            xml.OutOfElem();
+        }
+    }
+    else
+        cout << "Blad pliku!" << endl;
+
+    return incomes;
+}

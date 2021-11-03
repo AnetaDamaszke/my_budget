@@ -123,10 +123,7 @@ void UserMenager::logoutUser() {
     idNumberLoggedInUser = 0;
 }
 bool UserMenager::isUserLoggedIn() {
-    if (idNumberLoggedInUser > 0)
-        return true;
-    else
-        return false;
+    return (idNumberLoggedInUser > 0);
 }
 
 int UserMenager::getIdNumberOfLoggedInUser() {

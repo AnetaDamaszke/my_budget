@@ -17,7 +17,7 @@ class IncomeMenager : public CashValueMenager {
     FileWithIncomes fileWithIncomes;
 
     Income getDataOfNewIncome();
-    int getIdOfNewIncome();
+
     int getIdNumberOfLoggedInUser();
 
 public:
@@ -31,6 +31,7 @@ public:
     float getIncomesFromCurrenthMonth();
     float getIncomesFromLastMonth();
     float getIncomesFromSelectedDate(string firstDate, string secondDate);
+    int getIdOfNewIncome();
 };
 
 #endif

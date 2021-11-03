@@ -21,8 +21,6 @@ Expense ExpenseMenager::getDataOfNewExpense()
     expense.setUserId(getIdNumberOfLoggedInUser());
 
     string date, item, amount;
-    float amountFl;
-    int dateInt;
     char choice;
 
     cout << "Czy chcesz dodac wydatek z dzisiejsza data? t/n: ";
@@ -32,32 +30,32 @@ Expense ExpenseMenager::getDataOfNewExpense()
     {
         date = getCurrentDate();
         cout << "Dzisiejsza data: " << date << endl;
-        dateInt = conversionDateToInteger(date);
-        expense.setDate(dateInt);
+        expense.setDate(conversionDateToInteger(date));
     }
-    else if(choice == 'n')
+    else
     {
-        cout << "Podaj date wydatku w formacie RRRR-MM-DD: ";
-        date = AccessoryMethods::getLine();
-
-        if(isDateCorrect(date))
+        while(true)
         {
-            dateInt = conversionDateToInteger(date);
-            expense.setDate(dateInt);
+            cout << "Podaj date wydatku w formacie RRRR-MM-DD: ";
+            date = AccessoryMethods::getLine();
+
+            if(isDateCorrect(date))
+            {
+                expense.setDate(conversionDateToInteger(date));
+
+                cout << "Podaj nazwe wydatku: ";
+                item = AccessoryMethods::getLine();
+                expense.setItem(item);
+
+                cout << "Podaj wartosc wydatku: ";
+                amount = AccessoryMethods::getLine();
+                amount = changeAmountToCorrect(amount);
+                expense.setAmount(conversionStringToFloat(amount));
+
+                return expense;
+            }
         }
     }
-
-    cout << "Podaj nazwe wydatku: ";
-    item = AccessoryMethods::getLine();
-    expense.setItem(item);
-
-    cout << "Podaj wartosc wydatku: ";
-    amount = AccessoryMethods::getLine();
-    amount = changeAmountToCorrect(amount);
-    amountFl = conversionStringToFloat(amount);
-    expense.setAmount(amountFl);
-
-    return expense;
 }
 
 void ExpenseMenager::displayAllExpenses()
@@ -73,10 +71,7 @@ void ExpenseMenager::displayAllExpenses()
 
 int ExpenseMenager::getIdOfNewExpense()
 {
-    if (expenses.empty() == true)
-        return 1;
-    else
-        return expenses.back().getExpenseId() + 1;
+    return (expenses.empty()) ? 1 : expenses.back().getExpenseId() + 1;
 }
 
 int ExpenseMenager::getIdNumberOfLoggedInUser()

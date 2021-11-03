@@ -82,6 +82,6 @@ int __main()
     FileWithIncomes fileWithIncomes("incomes.xml");
     FileWithExpenses fileWithExpenses("expenses.xml");
 
-    fileWithExpenses.loadExpensesFromFile(2);
-    expenseMenager.displayAllExpenses();
+    fileWithIncomes.loadAllIncomesIdFromFile();
+    cout << incomeMenager.getIdOfNewIncome() << endl;
 }

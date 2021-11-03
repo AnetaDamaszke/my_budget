@@ -21,8 +21,6 @@ Income IncomeMenager::getDataOfNewIncome()
     income.setUserId(getIdNumberOfLoggedInUser());
 
     string date, item, amount;
-    float amountFl;
-    int dateInt;
     char choice;
 
     cout << "Czy chcesz dodac przychod z dzisiejsza data? t/n: ";
@@ -32,32 +30,32 @@ Income IncomeMenager::getDataOfNewIncome()
     {
         date = getCurrentDate();
         cout << "Dzisiejsza data: " << date << endl;
-        dateInt = conversionDateToInteger(date);
-        income.setDate(dateInt);
+        income.setDate(conversionDateToInteger(date));
     }
-    else if(choice == 'n')
+    else
     {
-        cout << "Podaj date przychodu w formacie RRRR-MM-DD: ";
-        date = AccessoryMethods::getLine();
-
-        if(isDateCorrect(date))
+        while(true)
         {
-            dateInt = conversionDateToInteger(date);
-            income.setDate(dateInt);
+            cout << "Podaj date przychodu w formacie RRRR-MM-DD: ";
+            date = AccessoryMethods::getLine();
+
+            if(isDateCorrect(date))
+            {
+                income.setDate(conversionDateToInteger(date));
+
+                cout << "Podaj nazwe przychodu: ";
+                item = AccessoryMethods::getLine();
+                income.setItem(item);
+
+                cout << "Podaj wartosc przychodu: ";
+                amount = AccessoryMethods::getLine();
+                amount = changeAmountToCorrect(amount);
+                income.setAmount(conversionStringToFloat(amount));
+
+                return income;
+            }
         }
     }
-
-    cout << "Podaj nazwe przychodu: ";
-    item = AccessoryMethods::getLine();
-    income.setItem(item);
-
-    cout << "Podaj wartosc przychodu: ";
-    amount = AccessoryMethods::getLine();
-    amount = changeAmountToCorrect(amount);
-    amountFl = conversionStringToFloat(amount);
-    income.setAmount(amountFl);
-
-    return income;
 }
 
 void IncomeMenager::displayAllIncomes()
@@ -73,10 +71,9 @@ void IncomeMenager::displayAllIncomes()
 
 int IncomeMenager::getIdOfNewIncome()
 {
-    if (incomes.empty() == true)
-        return 1;
-    else
-        return incomes.back().getIncomeId() + 1;
+    incomes = fileWithIncomes.loadAllIncomesIdFromFile();
+
+    return (incomes.empty()) ? 1 : incomes.back().getIncomeId() + 1;
 }
 
 int IncomeMenager::getIdNumberOfLoggedInUser()
