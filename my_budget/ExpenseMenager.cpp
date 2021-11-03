@@ -42,20 +42,21 @@ Expense ExpenseMenager::getDataOfNewExpense()
             if(isDateCorrect(date))
             {
                 expense.setDate(conversionDateToInteger(date));
-
-                cout << "Podaj nazwe wydatku: ";
-                item = AccessoryMethods::getLine();
-                expense.setItem(item);
-
-                cout << "Podaj wartosc wydatku: ";
-                amount = AccessoryMethods::getLine();
-                amount = changeAmountToCorrect(amount);
-                expense.setAmount(conversionStringToFloat(amount));
-
-                return expense;
+                break;
             }
         }
     }
+
+    cout << "Podaj nazwe wydatku: ";
+    item = AccessoryMethods::getLine();
+    expense.setItem(item);
+
+    cout << "Podaj wartosc wydatku: ";
+    amount = AccessoryMethods::getLine();
+    amount = changeAmountToCorrect(amount);
+    expense.setAmount(conversionStringToFloat(amount));
+
+    return expense;
 }
 
 void ExpenseMenager::displayAllExpenses()

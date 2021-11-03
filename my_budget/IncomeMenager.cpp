@@ -41,21 +41,22 @@ Income IncomeMenager::getDataOfNewIncome()
 
             if(isDateCorrect(date))
             {
-                income.setDate(conversionDateToInteger(date));
-
-                cout << "Podaj nazwe przychodu: ";
-                item = AccessoryMethods::getLine();
-                income.setItem(item);
-
-                cout << "Podaj wartosc przychodu: ";
-                amount = AccessoryMethods::getLine();
-                amount = changeAmountToCorrect(amount);
-                income.setAmount(conversionStringToFloat(amount));
-
-                return income;
+               income.setDate(conversionDateToInteger(date));
+               break;
             }
         }
     }
+
+    cout << "Podaj nazwe przychodu: ";
+    item = AccessoryMethods::getLine();
+    income.setItem(item);
+
+    cout << "Podaj wartosc przychodu: ";
+    amount = AccessoryMethods::getLine();
+    amount = changeAmountToCorrect(amount);
+    income.setAmount(conversionStringToFloat(amount));
+
+    return income;
 }
 
 void IncomeMenager::displayAllIncomes()
